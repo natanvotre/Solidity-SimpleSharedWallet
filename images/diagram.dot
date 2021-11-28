@@ -1,0 +1,24 @@
+digraph G {
+    size = "10,10"
+    d [shape=box, label="Deposit",style=filled,color=".7 .3 1.0"]
+    d_rule [shape=diamond,style=filled,color="gray", label="Anybody"]
+    d_action [label="Unlimited"]
+
+    w [shape=box, label="Withdraw",style=filled,color=".7 .3 1.0"]
+    w_owner [shape=diamond,style=filled,color="gray", label="Owner"]
+    w_owner_action [label="Unlimited"]
+    w_nonowner [shape=diamond,style=filled,color="gray", label="Non-Owner"]
+    w_nonowner_action [label="Limited amount \nby internal variable\n per user"]
+
+    allow [shape=box, label="Change Allowance",style=filled,color=".7 .3 1.0"]
+    allow_rule [shape=diamond,style=filled,color="gray", label="Only Owner"]
+    allow_action [label="Unlimited"]
+
+    d->d_rule->d_action
+
+    w->w_owner->w_owner_action
+    w->w_nonowner->w_nonowner_action
+
+    allow->allow_rule->allow_action
+    allow_rule->w_nonowner_action
+}
